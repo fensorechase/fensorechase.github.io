@@ -20,6 +20,12 @@ See more info at https://academicpages.github.io/
 
 ## Running Locally
 
+# NOTE (Chase):
+On my machine, to run locally:
+- $ bundle exec jekyll serve -l -H localhost
+
+
+
 When you are initially working your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
 
 1. Clone the repository and made updates as detailed above.

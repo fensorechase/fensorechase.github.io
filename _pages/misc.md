@@ -2,6 +2,8 @@
 title: "Miscellaneous"
 layout: archive
 permalink: /misc/
+redirect_from:
+  - /misc.html
 ---
 
 Honors, Academic Services, Volunteering and Other

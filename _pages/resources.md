@@ -9,7 +9,7 @@ permalink: /resources.html
 - [Eugene Yan: List of Applied ML Papers/tech blogs on ML in production](https://github.com/eugeneyan/applied-ml?tab=readme-ov-file)
 - [Eugene Yan: Language Modeling Reading List (to Start Your Paper Club)](https://eugeneyan.com//writing/llm-reading-list/)
 
-- [How Prototyping Can Help You to Get Buy-In])https://eugeneyan.com/writing/prototyping-to-get-buy-in/)
+- [How Prototyping Can Help You to Get Buy-In](https://eugeneyan.com/writing/prototyping-to-get-buy-in/)
 - [Chip Huyen: Building LLM applications for production](https://huyenchip.com/2023/04/11/llm-engineering.html)
 - [Chip Huyen: Llama Police -- A dashboard of Open Source LLM Tools](https://huyenchip.com/llama-police)
 

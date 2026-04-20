@@ -22,9 +22,9 @@ repository               : "fensorechase/fensorechase.github.io"
 author:
   # Biographic information
   avatar           : "cmf_headshot.jpg" #"profile.png"
-  name             : "Chase M. Fensore"
+  name             : "Chase Fensore"
   pronouns         : # example: "she/her"  
-  bio              : "Second year Ph.D. at Emory University, Department of Computer Science."
+  bio              : "Ph.D. Candidate at Emory University, Department of Computer Science."
   location         : "Atlanta, GA"
   employer         : "Emory University"
   uri              : # URL
@@ -56,7 +56,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : chase-fensore # Username
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username

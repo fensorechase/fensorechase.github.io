@@ -1,0 +1,612 @@
+---
+layout: none
+permalink: /journal-club/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Rounds · Emory CS Reading Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #f0f0f0;
+  color: #1a1a2e;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  background: #f0f0f0;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #012169;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+.nav-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  letter-spacing: -0.01em;
+}
+.nav-links {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+}
+.nav-links a {
+  display: block;
+  padding: 6px 12px;
+  font-size: 13.5px;
+  color: #555;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.13s, color 0.13s;
+}
+.nav-links a:hover { background: rgba(1,33,105,0.08); color: #012169; }
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-direction: column;
+  gap: 5px;
+}
+.hamburger span { display: block; width: 20px; height: 1.5px; background: #555; border-radius: 2px; }
+.mobile-menu { display: none; background: #ebebeb; border-bottom: 1px solid #d8d8d8; padding: 0.5rem 2rem 1rem; }
+.mobile-menu.open { display: block; }
+.mobile-menu a { display: block; padding: 9px 0; font-size: 15px; color: #333; text-decoration: none; border-bottom: 1px solid #ddd; }
+.mobile-menu a:last-child { border: none; }
+
+.page { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  gap: 3rem;
+  align-items: start;
+}
+
+.hero-left h1 {
+  font-family: 'Lora', serif;
+  font-size: clamp(1.9rem, 4vw, 2.55rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1a1a2e;
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.hero-left p {
+  font-size: 15.5px;
+  color: #444;
+  line-height: 1.75;
+  margin-bottom: 0.9rem;
+  max-width: 580px;
+}
+.hero-left p strong { color: #1a1a2e; font-weight: 600; }
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1.4rem;
+}
+.btn {
+  display: inline-block;
+  padding: 9px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.14s, transform 0.12s;
+}
+.btn:hover { opacity: 0.82; transform: translateY(-1px); }
+.btn-blue { background: #012169; color: #fff; }
+.btn-gray { background: #d0d0d0; color: #333; }
+
+.sidebar-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1rem;
+}
+.sidebar-card h3 {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 0.85rem;
+}
+.organizer-list { list-style: none; }
+.organizer-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+.organizer-item:last-child { border-bottom: none; }
+.org-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #012169;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+.org-name { font-size: 14px; color: #012169; font-weight: 500; }
+.org-role { font-size: 12px; color: #999; }
+.time-detail { font-size: 14px; color: #555; line-height: 1.75; }
+
+.divider { border: none; border-top: 1px solid #d8d8d8; margin: 2.5rem 0; }
+
+.section-hed {
+  font-family: 'Lora', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 0.55rem;
+}
+.section-sub {
+  font-size: 14.5px;
+  color: #666;
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 1.2rem;
+}
+
+.topic-row { display: flex; flex-wrap: wrap; gap: 7px; }
+.topic-tag {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 5px 14px;
+  font-size: 13.5px;
+  color: #333;
+}
+
+.schedule-wrap {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.schedule-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.schedule-table thead th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #999;
+  background: #fafafa;
+  border-bottom: 1px solid #ececec;
+}
+.schedule-table tbody tr { border-bottom: 1px solid #f2f2f2; transition: background 0.1s; }
+.schedule-table tbody tr:last-child { border-bottom: none; }
+.schedule-table tbody tr:hover { background: #fafafa; }
+.schedule-table td { padding: 14px 16px; vertical-align: top; line-height: 1.5; }
+.td-date { white-space: nowrap; font-size: 13px; font-weight: 500; color: #555; width: 100px; }
+.td-type { width: 90px; padding-top: 15px; }
+.td-title { font-weight: 500; margin-bottom: 3px; color: #1a1a2e; }
+.td-desc { font-size: 13px; color: #777; line-height: 1.55; }
+
+.badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.badge-paper { background: #dce8f8; color: #1a3c6e; }
+.badge-vibe  { background: #d8f0df; color: #1a5c2e; }
+.badge-lab   { background: #fef0cc; color: #7a5200; }
+
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+.format-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.15rem 1.25rem;
+  transition: border-color 0.14s;
+}
+.format-card:hover { border-color: #012169; }
+.format-card .f-badge { margin-bottom: 10px; display: block; }
+.format-card h3 { font-size: 15px; font-weight: 600; color: #1a1a2e; margin-bottom: 6px; }
+.format-card p { font-size: 13.5px; color: #666; line-height: 1.65; margin-bottom: 0.8rem; }
+.timing-list { list-style: none; border-top: 1px solid #f2f2f2; padding-top: 0.7rem; }
+.timing-list li { display: flex; gap: 10px; font-size: 12.5px; color: #777; padding: 3px 0; line-height: 1.5; }
+.timing-list .t { color: #012169; font-weight: 600; min-width: 44px; flex-shrink: 0; }
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+.role-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-left: 3px solid #012169;
+  border-radius: 0 8px 8px 0;
+  padding: 0.85rem 1rem;
+}
+.role-card .r-name { font-size: 14px; font-weight: 600; color: #012169; margin-bottom: 4px; }
+.role-card .r-desc { font-size: 13px; color: #777; line-height: 1.55; }
+
+.logistics-grid {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 1rem 1.5rem;
+}
+.lg-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: #aaa; margin-bottom: 4px; }
+.lg-val { font-size: 14.5px; font-weight: 500; color: #1a1a2e; }
+.lg-sub { font-size: 13px; color: #999; margin-top: 1px; }
+
+footer {
+  background: #1a1a2e;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 1.8rem 2rem;
+  font-size: 13px;
+  line-height: 1.8;
+}
+footer .footer-name { color: rgba(255,255,255,0.85); font-weight: 500; }
+footer a { color: rgba(255,255,255,0.65); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 700px) {
+  .hero-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .page { padding: 1.8rem 1.25rem 3rem; }
+  nav { padding: 0 1.25rem; }
+  .mobile-menu { padding: 0.5rem 1.25rem 1rem; }
+  .schedule-table td { padding: 11px 10px; }
+  .td-desc { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">
+      <div class="nav-logo">SR</div>
+      <span class="nav-title">Semantic Rounds</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#formats">Formats</a></li>
+      <li><a href="#logistics">Logistics</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#schedule" onclick="closeMenu()">Schedule</a>
+  <a href="#formats" onclick="closeMenu()">Formats</a>
+  <a href="#logistics" onclick="closeMenu()">Logistics</a>
+</div>
+
+<div class="page">
+
+  <div class="hero-layout">
+
+    <div class="hero-left" id="about">
+      <h1>Emory CS<br>Reading Group</h1>
+      <p>
+        A small PhD reading group at Emory focused on natural language processing,
+        large language models, information retrieval, and ML applied to health and clinical settings.
+        We meet every other week to present papers, build quick prototypes, and explore new tools together.
+      </p>
+      <p>
+        Sessions rotate between paper presentations, vibe coding challenges, and group lab
+        explorations. Topics are shaped by the research interests of everyone in the group,
+        with a particular focus on <strong>clinical NLP, LLM evaluation, RAG, vision-language models,
+        and alignment</strong>.
+      </p>
+      <p>Interested in joining? Reach out via Slack.</p>
+      <div class="cta-row">
+        <a class="btn btn-blue" href="#schedule">View schedule</a>
+        <a class="btn btn-gray" href="#formats">How it works</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-card">
+        <h3>Organizers - members of labs:</h3>
+        <ul class="organizer-list">
+          <li class="organizer-item">
+            <div class="org-avatar">P</div>
+            <div>
+              <div class="org-name"><a href="https://joyceho.github.io/" target="_blank">PRADA-X Lab</a></div>
+              <div class="org-role"></div>
+            </div>
+          </li>
+          <li class="organizer-item">
+            <div class="org-avatar">E</div>
+            <div>
+              <div class="org-name"><a href="https://ir.cs.emory.edu/" target="_blank">Emory Intelligent Information Access Lab</a></div>
+              <div class="org-role"></div>
+            </div>
+          </li>
+          <li class="organizer-item">
+            <div class="org-avatar">H</div>
+            <div>
+              <div class="org-name"><a href="https://www.hitilab.com/" target="_blank">HITI Lab</a></div>
+              <div class="org-role"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>Time &amp; Location</h3>
+        <div class="time-detail">
+          <b>Summer 2025</b> &mdash; May through July<br>
+          Every other week &middot; 1 hour<br>
+          <br>
+          <b>Hybrid</b> &mdash; Zoom + Emory campus<br>
+          Zoom link shared via Slack
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <div>
+    <div class="section-hed">Topics</div>
+    <div class="section-sub">We'll cover a range of emerging areas in NLP and ML. Paper nominations from the group shape each session.</div>
+    <div class="topic-row">
+      <span class="topic-tag">Large language models</span>
+      <span class="topic-tag">LLM evaluation &amp; benchmarking</span>
+      <span class="topic-tag">LLM alignment</span>
+      <span class="topic-tag">Thinking traces &amp; eval evasion</span>
+      <span class="topic-tag">Information retrieval &amp; RAG</span>
+      <span class="topic-tag">Clinical NLP</span>
+      <span class="topic-tag">SDOH &amp; EHR modeling</span>
+      <span class="topic-tag">Vision-language models</span>
+      <span class="topic-tag">Radiology AI</span>
+      <span class="topic-tag">Annotation workflows</span>
+      <span class="topic-tag">AI research tooling</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div id="schedule">
+    <div class="section-hed">Schedule</div>
+    <div class="section-sub">
+      6 sessions across May, June, and July. Exact day and time confirmed once the group availability survey closes.
+      Presenter slots for sessions 2, 4, and 6 are assigned at kickoff.
+    </div>
+    <div class="schedule-wrap">
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Session</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-date">Week of<br>May 18</td>
+            <td class="td-type"><span class="badge badge-paper">Paper</span></td>
+            <td>
+              <div class="td-title">Kickoff &mdash; intro presentation</div>
+              <div class="td-desc">Organizers present. First 10 min covers ground rules, format overview, and interest survey results. Paper is something broadly accessible, e.g. a foundational RAG or LLM survey. Presenter slots for the summer assigned here.</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-date">Week of<br>Jun 1</td>
+            <td class="td-type"><span class="badge badge-paper">Paper</span></td>
+            <td>
+              <div class="td-title">Rotating presenter #1</div>
+              <div class="td-desc">Paper nominated and voted on by the group via Slack. Suggested topic pool: LLM evaluation, health NLP, VLMs in radiology. Paper shared at least 5 days before the session.</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-date">Week of<br>Jun 15</td>
+            <td class="td-type"><span class="badge badge-vibe">Vibe code</span></td>
+            <td>
+              <div class="td-title">Vibe coding session #1</div>
+              <div class="td-desc">Prompt released ~2 weeks prior. Pairs welcome. Each person or pair demos in 3&ndash;4 minutes. Closes with a 10-min group debrief on approaches.</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-date">Week of<br>Jun 29</td>
+            <td class="td-type"><span class="badge badge-paper">Paper</span></td>
+            <td>
+              <div class="td-title">Rotating presenter #2</div>
+              <div class="td-desc">Suggested topic pool: LLM alignment, thinking traces, evaluating models without them knowing they're being tested, RAG improvements.</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-date">Week of<br>Jul 13</td>
+            <td class="td-type"><span class="badge badge-lab">Group lab</span></td>
+            <td>
+              <div class="td-title">Group lab session</div>
+              <div class="td-desc">Theme chosen from the interest survey. Options: integrating deep research tools into a publishing workflow, working with new HuggingFace benchmarks, or building a custom annotation tool. Each person shares one finding or demo (5 min), then open discussion.</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-date">Week of<br>Jul 27</td>
+            <td class="td-type"><span class="badge badge-paper">Paper</span></td>
+            <td>
+              <div class="td-title">Rotating presenter #3 &amp; retrospective</div>
+              <div class="td-desc">Final session of the summer. Last 10 minutes: quick retrospective on format, topics for fall, and whether to continue. Good moment to collect paper nominations for a potential fall season.</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div id="formats">
+    <div class="section-hed">How sessions work</div>
+    <div class="section-sub">Three rotating formats, all 60 minutes.</div>
+    <div class="format-grid">
+      <div class="format-card">
+        <span class="f-badge"><span class="badge badge-paper">Paper</span></span>
+        <h3>Paper presentation</h3>
+        <p>One presenter walks the group through a paper: motivation, method, key results, and their own take. Group discussion follows.</p>
+        <ul class="timing-list">
+          <li><span class="t">0-20</span> Paper walkthrough</li>
+          <li><span class="t">20-35</span> Presenter's critique &amp; open questions</li>
+          <li><span class="t">35-55</span> Group discussion</li>
+          <li><span class="t">55-60</span> Wrap-up &amp; next session logistics</li>
+        </ul>
+      </div>
+      <div class="format-card">
+        <span class="f-badge"><span class="badge badge-vibe">Vibe code</span></span>
+        <h3>Vibe coding</h3>
+        <p>A research problem prompt goes out ~2 weeks early. Everyone builds a small solution (solo or in pairs) and demos it to the group.</p>
+        <ul class="timing-list">
+          <li><span class="t">0-5</span> Prompt reframe</li>
+          <li><span class="t">5-40</span> Demos (3&ndash;4 min each)</li>
+          <li><span class="t">40-55</span> Group debrief on approaches</li>
+          <li><span class="t">55-60</span> Next session logistics</li>
+        </ul>
+      </div>
+      <div class="format-card">
+        <span class="f-badge"><span class="badge badge-lab">Group lab</span></span>
+        <h3>Group lab</h3>
+        <p>Everyone explores the same theme independently (a tool, dataset, or workflow) and brings one finding or demo to share.</p>
+        <ul class="timing-list">
+          <li><span class="t">0-5</span> Theme intro</li>
+          <li><span class="t">5-40</span> Individual shares (~5 min each)</li>
+          <li><span class="t">40-55</span> Open discussion</li>
+          <li><span class="t">55-60</span> Wrap-up</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div id="logistics">
+    <div class="section-hed">Logistics</div>
+    <div class="section-sub">Each session has a small set of rotating roles to keep things running smoothly.</div>
+    <div class="roles-grid">
+      <div class="role-card">
+        <div class="r-name">Presenter</div>
+        <div class="r-desc">Leads the paper walkthrough or demo. Drives paper nomination and voting for their session, and shares the paper at least 5 days prior.</div>
+      </div>
+      <div class="role-card">
+        <div class="r-name">Facilitator</div>
+        <div class="r-desc">Keeps time and opens and closes discussion. Can overlap with the organizer.</div>
+      </div>
+      <div class="role-card">
+        <div class="r-name">Note-taker</div>
+        <div class="r-desc">Captures 3&ndash;5 key takeaways in the shared doc within 24 hours. Rotates each meeting.</div>
+      </div>
+    </div>
+    <div class="logistics-grid">
+      <div>
+        <div class="lg-label">Cadence</div>
+        <div class="lg-val">Every other week</div>
+        <div class="lg-sub">6 sessions, May&ndash;July</div>
+      </div>
+      <div>
+        <div class="lg-label">Duration</div>
+        <div class="lg-val">1 hour per session</div>
+        <div class="lg-sub">Hard stop at 60 min</div>
+      </div>
+      <div>
+        <div class="lg-label">Format</div>
+        <div class="lg-val">Hybrid</div>
+        <div class="lg-sub">Zoom + Emory campus</div>
+      </div>
+      <div>
+        <div class="lg-label">Paper lead time</div>
+        <div class="lg-val">5 days minimum</div>
+        <div class="lg-sub">Shared via Slack</div>
+      </div>
+      <div>
+        <div class="lg-label">Nominations</div>
+        <div class="lg-val">Slack thread</div>
+        <div class="lg-sub">Emoji vote to select</div>
+      </div>
+      <div>
+        <div class="lg-label">Notes</div>
+        <div class="lg-val">Shared Google Doc</div>
+        <div class="lg-sub">Posted within 24 hours</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-name">Semantic Rounds &mdash; Emory University &middot; Summer 2025</div>
+  <div>Department of Computer Science</div>
+  <div style="margin-top: 0.6rem;">
+    Inspired by <a href="https://web.stanford.edu/class/cs25/" target="_blank" rel="noopener">Stanford CS25</a>
+    and the <a href="https://edinburgh-rl.github.io/reading-group" target="_blank" rel="noopener">Edinburgh RL Reading Group</a>
+    Content is not a reflection of any official position of Emory University or any mentioned research labs.
+  </div>
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
+</script>
+</body>
+</html>

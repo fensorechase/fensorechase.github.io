@@ -12,6 +12,7 @@ I’m a **Ph.D. candidate in [Computer Science at Emory University](https://comp
 ___
 
 My research focuses on building and evaluating **machine learning systems for healthcare**, with an emphasis on patient-facing AI, question-answering, and retrieval-augmented systems. I’m especially interested in pre-deployment evaluation to increase downstream safety, alignment, and steering capacity in real-world settings.
+
 ___
 
 Recently I've worked on: practical LLM judging for health QA, synthetic testbeds for targeted retrieval evaluation, design of benchmarking principles for RAG systems. Looking ahead, I want to apply those pre-deployment frameworks to personalized consumer health coaching systems (e.g., for metabolic health). Resulting conversational agents would be capable of adapting to individual needs while remaining knowledge-grounded and trustworthy. 
